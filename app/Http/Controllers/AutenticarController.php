@@ -18,6 +18,9 @@ class AutenticarController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
 
+        // Asignamos los roles a un usuario
+        $user->roles()->attach($request->roles);
+
         return response()->json([
             'res' => true,
             'message' => 'Usuario registrado Correctamente'
@@ -39,7 +42,9 @@ class AutenticarController extends Controller
 
         return response()->json([
             'res' => true,
-            'token' => $token
+            'token' => $token,
+            'user' => $user,
+            'roles' => $user->roles // Retorna los roles de un usuario
         ], 200);
     }
 

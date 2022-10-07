@@ -23,6 +23,7 @@ class PersonaController extends Controller
 
         // Usando el resource
         return PersonaResource::collection(Persona::all());
+        // return PersonaResource::collection(Persona::paginate(5));
     }
 
     /**
